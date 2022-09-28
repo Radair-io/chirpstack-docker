@@ -1,0 +1,47 @@
+# See https://www.chirpstack.io/network-server/install/config/ for a full
+# configuration example and documentation.
+#
+# This file is for the US915 band (channels 0-7). See the examples/ folder for more
+# configuration examples.
+
+[postgresql]
+dsn="postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable"
+
+[redis]
+url="redis://redis:6379"
+
+[network_server]
+net_id="000000"
+
+[network_server.band]
+name="US915"
+
+[network_server.network_settings]
+enabled_uplink_channels=[0, 1, 2, 3, 4, 5, 6, 7, 64]
+
+[network_server.gateway.backend.mqtt]
+server="tcp://mosquitto:1883"
+
+[network_server.gateway]
+ca_cert="/certs/ca/ca.pem"
+ca_key="/certs/ca/ca-key.pem"
+
+event_topic="gateway/+/event/+"
+command_topic_template="gateway/{{ .GatewayID }}/command/{{ .CommandType }}"
+qos=0
+
+[join_server.default]
+server="http://chirpstack-application-server:8003"
+  # # Use the async API scheme.
+async=false
+ca_cert="/certs/ca/ca.pem"
+tls_cert="/certs/chirpstack-application-server/join-api/client/chirpstack-application-server-join-api-client.pem"
+tls_key="/certs/chirpstack-application-server/join-api/client/chirpstack-application-server-join-api-client-key.pem"
+
+
+[network_server.api]
+# ip:port to bind the api server
+bind="0.0.0.0:8000"
+ca_cert="/certs/ca/ca.pem"
+tls_cert="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server.pem"
+tls_key="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server-key.pem"
