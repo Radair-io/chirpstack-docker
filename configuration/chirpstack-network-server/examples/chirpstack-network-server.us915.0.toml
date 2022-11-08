@@ -23,4 +23,4 @@ name="US915"
 server="tcp://mosquitto:1883"
 
 [join_server.default]
-server="http://chirpstack-application-server:8003"
+server="https://chirpstack-application-server:8003"

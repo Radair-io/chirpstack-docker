@@ -19,6 +19,13 @@ name="US915"
 [network_server.network_settings]
 enabled_uplink_channels=[0, 1, 2, 3, 4, 5, 6, 7, 64]
 
+[network_server.api]
+# ip:port to bind the api server
+bind="0.0.0.0:8000"
+ca_cert="/certs/ca/ca.pem"
+tls_cert="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server.pem"
+tls_key="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server-key.pem"
+
 [network_server.gateway.backend.mqtt]
 server="tcp://mosquitto:1883"
 
@@ -31,17 +38,9 @@ command_topic_template="gateway/{{ .GatewayID }}/command/{{ .CommandType }}"
 qos=0
 
 [join_server.default]
-server="http://chirpstack-application-server:8003"
+server="https://chirpstack-application-server:8003"
   # # Use the async API scheme.
 async=false
 ca_cert="/certs/ca/ca.pem"
 tls_cert="/certs/chirpstack-application-server/join-api/client/chirpstack-application-server-join-api-client.pem"
 tls_key="/certs/chirpstack-application-server/join-api/client/chirpstack-application-server-join-api-client-key.pem"
-
-
-[network_server.api]
-# ip:port to bind the api server
-bind="0.0.0.0:8000"
-ca_cert="/certs/ca/ca.pem"
-tls_cert="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server.pem"
-tls_key="/certs/chirpstack-network-server/api/server/chirpstack-network-server-api-server-key.pem"

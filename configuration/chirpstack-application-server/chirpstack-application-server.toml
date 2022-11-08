@@ -15,17 +15,23 @@ ca_cert="/certs/ca/ca.pem"
 ca_key="/certs/ca/ca-key.pem"
 
 [application_server.api]
-public_host="chirpstack-application-server:8001"
+bind="0.0.0.0:8001"
 ca_cert="/certs/ca/ca.pem"
 tls_cert="/certs/chirpstack-application-server/api/server/chirpstack-application-server-api-server.pem"
 tls_key="/certs/chirpstack-application-server/api/server/chirpstack-application-server-api-server-key.pem"
+public_host="chirpstack-application-server:8001"
 
 [application_server.external_api]
 bind="0.0.0.0:8080"
-jwt_secret="verysecret"
+# tls_cert="/certs/https/app-server-cert.pem"
+# tls_key="/certs/https/app-server-key.pem"
+jwt_secret="LWXK71ys0ZqxlsxEeRvS3s4fxHKlu4PvKhYyAJQtIjw="
 
 [join_server]
 bind="0.0.0.0:8003"
 ca_cert="/certs/ca/ca.pem"
 tls_cert="/certs/chirpstack-application-server/join-api/server/chirpstack-application-server-join-api-server.pem"
 tls_key="/certs/chirpstack-application-server/join-api/server/chirpstack-application-server-join-api-server-key.pem"
+
+[network_server]
+server="chirpstack-network-server:8000"
